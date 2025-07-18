@@ -185,10 +185,10 @@ export default function DailyOverview() {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+          <h1 className="text-4xl font-extrabold text-gray-900 mb-3">
             Good morning, Chloe! ☀️
           </h1>
-          <p className="text-gray-600">
+          <p className="text-lg text-gray-700">
             {formatDate(currentTime)} • {currentTime.toLocaleTimeString('en-US', { 
               hour: 'numeric', 
               minute: '2-digit',
@@ -199,7 +199,7 @@ export default function DailyOverview() {
 
         {/* Priority Matrix */}
         <div className="mb-8">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
+          <h2 className="text-2xl font-bold text-gray-900 mb-5 flex items-center gap-3">
             <svg className="w-6 h-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17v-6a2 2 0 012-2h2a2 2 0 012 2v6m-6 0h6" /></svg>
             Today's Priorities
           </h2>
@@ -209,7 +209,7 @@ export default function DailyOverview() {
                 <div className="flex items-start justify-between mb-3">
                   <div className="flex items-center gap-2">
                     {getCategoryIcon(priority.category)}
-                    <span className="text-sm font-medium text-gray-500 capitalize">
+                    <span className="text-base font-semibold text-gray-500 capitalize">
                       {priority.category}
                     </span>
                   </div>
@@ -217,9 +217,9 @@ export default function DailyOverview() {
                     <svg className="w-5 h-5 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                   )}
                 </div>
-                <h3 className="font-medium text-gray-900 mb-2">{priority.title}</h3>
+                <h3 className="font-bold text-lg text-gray-900 mb-2">{priority.title}</h3>
                 <div className="mb-2">
-                  <div className="flex justify-between text-sm text-gray-600 mb-1">
+                  <div className="flex justify-between text-base text-gray-700 mb-1">
                     <span>Progress</span>
                     <span>{priority.progress}%</span>
                   </div>
@@ -231,7 +231,7 @@ export default function DailyOverview() {
                   </div>
                 </div>
                 {priority.dueTime && (
-                  <p className="text-sm text-gray-500 flex items-center gap-1">
+                  <p className="text-base text-gray-500 flex items-center gap-1">
                     <svg className="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                     Due {priority.dueTime}
                   </p>
@@ -246,7 +246,7 @@ export default function DailyOverview() {
           <div className="lg:col-span-2 space-y-8">
             {/* Today's Schedule */}
             <div>
-              <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
+              <h2 className="text-2xl font-bold text-gray-900 mb-5 flex items-center gap-3">
                 <svg className="w-6 h-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" /></svg>
                 Today's Schedule
               </h2>
@@ -254,16 +254,16 @@ export default function DailyOverview() {
                 <div className="divide-y divide-gray-100">
                   {todaysSchedule.map((item) => (
                     <div key={item.id} className="p-4 flex items-center gap-4">
-                      <div className="text-sm font-medium text-gray-900 w-20">
+                      <div className="text-base font-medium text-gray-900 w-20">
                         {item.time}
                       </div>
                       <div className="flex-1">
-                        <h3 className="font-medium text-gray-900">{item.title}</h3>
+                        <h3 className="font-bold text-lg text-gray-900">{item.title}</h3>
                         {item.location && (
-                          <p className="text-sm text-gray-500">{item.location}</p>
+                          <p className="text-base text-gray-500">{item.location}</p>
                         )}
                       </div>
-                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(item.status)}`}>
+                      <span className={`px-3 py-1 rounded-full text-base font-bold ${getStatusColor(item.status)}`}>
                         {item.status}
                       </span>
                     </div>
@@ -274,23 +274,23 @@ export default function DailyOverview() {
 
             {/* Quick Actions */}
             <div>
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Quick Actions</h2>
+              <h2 className="text-2xl font-bold text-gray-900 mb-5">Quick Actions</h2>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                <button className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:bg-gray-50 transition-colors text-center">
-                  <svg className="w-8 h-8 text-blue-600 mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 20l9-5-9-5-9 5 9 5z" /></svg>
-                  <span className="text-sm font-medium text-gray-900">Submit Assignment</span>
+                <button className="bg-white p-5 rounded-lg shadow-sm border border-gray-200 hover:bg-gray-50 transition-colors text-center">
+                  <BookOpenIcon className="w-10 h-10 text-blue-600 mx-auto mb-3" />
+                  <span className="text-base font-semibold text-gray-900">Submit Assignment</span>
                 </button>
-                <button className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:bg-gray-50 transition-colors text-center">
-                  <svg className="w-8 h-8 text-green-600 mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                  <span className="text-sm font-medium text-gray-900">Log Nannying</span>
+                <button className="bg-white p-5 rounded-lg shadow-sm border border-gray-200 hover:bg-gray-50 transition-colors text-center">
+                  <svg className="w-10 h-10 text-green-600 mx-auto mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                  <span className="text-base font-semibold text-gray-900">Log Nannying</span>
                 </button>
-                <button className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:bg-gray-50 transition-colors text-center">
-                  <svg className="w-8 h-8 text-purple-600 mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 20l9-5-9-5-9 5 9 5z" /></svg>
-                  <span className="text-sm font-medium text-gray-900">Spanish Practice</span>
+                <button className="bg-white p-5 rounded-lg shadow-sm border border-gray-200 hover:bg-gray-50 transition-colors text-center">
+                  <svg className="w-10 h-10 text-purple-600 mx-auto mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 20l9-5-9-5-9 5 9 5z" /></svg>
+                  <span className="text-base font-semibold text-gray-900">Spanish Practice</span>
                 </button>
-                <button className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:bg-gray-50 transition-colors text-center">
-                  <svg className="w-8 h-8 text-orange-600 mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17v-6a2 2 0 012-2h2a2 2 0 012 2v6m-6 0h6" /></svg>
-                  <span className="text-sm font-medium text-gray-900">View Analytics</span>
+                <button className="bg-white p-5 rounded-lg shadow-sm border border-gray-200 hover:bg-gray-50 transition-colors text-center">
+                  <svg className="w-10 h-10 text-orange-600 mx-auto mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17v-6a2 2 0 012-2h2a2 2 0 012 2v6m-6 0h6" /></svg>
+                  <span className="text-base font-semibold text-gray-900">View Analytics</span>
                 </button>
               </div>
             </div>
@@ -300,11 +300,11 @@ export default function DailyOverview() {
           <div className="space-y-8">
             {/* Weekly Progress */}
             <div>
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Weekly Progress</h2>
-              <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-200 space-y-4">
+              <h2 className="text-2xl font-bold text-gray-900 mb-5">Weekly Progress</h2>
+              <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 space-y-5">
                 {weeklyProgress.map((metric, index) => (
                   <div key={index}>
-                    <div className="flex justify-between text-sm text-gray-600 mb-1">
+                    <div className="flex justify-between text-base text-gray-700 mb-1">
                       <span>{metric.label}</span>
                       <span>{metric.current}/{metric.target} {metric.unit}</span>
                     </div>
@@ -321,7 +321,7 @@ export default function DailyOverview() {
 
             {/* AI Alerts */}
             <div>
-              <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
+              <h2 className="text-2xl font-bold text-gray-900 mb-5 flex items-center gap-3">
                 <svg className="w-6 h-6 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V4a2 2 0 10-4 0v1.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
                 AI Insights
               </h2>
@@ -330,12 +330,12 @@ export default function DailyOverview() {
                   <div key={alert.id} className={`p-4 rounded-lg border ${
                     alert.urgent ? 'bg-red-50 border-red-200' : 'bg-blue-50 border-blue-200'
                   }`}>
-                    <h3 className={`font-medium mb-1 ${
+                    <h3 className={`font-bold text-base mb-2 ${
                       alert.urgent ? 'text-red-800' : 'text-blue-800'
                     }`}>
                       {alert.title}
                     </h3>
-                    <p className={`text-sm ${
+                    <p className={`text-base ${
                       alert.urgent ? 'text-red-600' : 'text-blue-600'
                     }`}>
                       {alert.message}
@@ -347,19 +347,19 @@ export default function DailyOverview() {
 
             {/* Recent Achievements */}
             <div>
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Recent Wins 🎉</h2>
-              <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-200 space-y-3">
-                <div className="flex items-center gap-3">
-                  <svg className="w-5 h-5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4" /></svg>
-                  <span className="text-sm text-gray-900">Completed Chemistry Lab with 95%</span>
+              <h2 className="text-2xl font-bold text-gray-900 mb-5">Recent Wins 🎉</h2>
+              <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 space-y-4">
+                <div className="flex items-center gap-4">
+                  <CheckCircleIcon className="w-6 h-6 text-green-500" />
+                  <span className="text-base font-semibold text-gray-900">Completed Chemistry Lab with 95%</span>
                 </div>
-                <div className="flex items-center gap-3">
-                  <svg className="w-5 h-5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4" /></svg>
-                  <span className="text-sm text-gray-900">7-day Spanish practice streak!</span>
+                <div className="flex items-center gap-4">
+                  <CheckCircleIcon className="w-6 h-6 text-green-500" />
+                  <span className="text-base font-semibold text-gray-900">7-day Spanish practice streak!</span>
                 </div>
-                <div className="flex items-center gap-3">
-                  <svg className="w-5 h-5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4" /></svg>
-                  <span className="text-sm text-gray-900">Exceeded weekly study hour goal</span>
+                <div className="flex items-center gap-4">
+                  <CheckCircleIcon className="w-6 h-6 text-green-500" />
+                  <span className="text-base font-semibold text-gray-900">Exceeded weekly study hour goal</span>
                 </div>
               </div>
             </div>
