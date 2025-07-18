@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 
 const NAV_ITEMS = [
@@ -34,38 +34,60 @@ const NAV_ITEMS = [
 
 export default function Sidebar() {
   const [collapsed, setCollapsed] = useState(false);
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => setCurrentTime(new Date()), 60000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const formatDate = (date: Date) =>
+    date.toLocaleDateString("en-US", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
 
   return (
     <nav
       aria-label="Main navigation"
-      className={`h-full bg-gradient-to-b from-pink-400 via-blue-400 to-green-300 dark:from-purple-900 dark:via-blue-900 dark:to-green-900 border-r-4 border-pink-500 dark:border-purple-700 transition-all duration-200 flex flex-col shadow-2xl ${collapsed ? "w-16" : "w-64"} rounded-r-3xl relative`}
+      className={`fixed top-0 left-0 h-screen bg-gradient-to-b from-pink-400 via-blue-400 to-green-300 dark:from-purple-900 dark:via-blue-900 dark:to-green-900 border-r-4 border-pink-500 dark:border-purple-700 transition-all duration-200 flex flex-col shadow-2xl ${collapsed ? "w-16" : "w-64"} z-20`}
     >
-      <div className={`flex items-center justify-between ${collapsed ? "px-2" : "px-4"} py-4 border-b border-white/20 dark:border-black/20`}> 
-        <span className={`font-extrabold text-xl tracking-tight text-white drop-shadow-lg transition-all duration-200 ${collapsed ? "hidden" : "block"}`}>Hi Chloe!</span>
-        <button
-          aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
-          onClick={() => setCollapsed((c) => !c)}
-          className="p-2 rounded-full bg-white/30 dark:bg-black/30 hover:bg-white/50 dark:hover:bg-black/50 focus:outline-none focus:ring-2 focus:ring-pink-400 dark:focus:ring-purple-400 transition-colors shadow"
-        >
-          <span aria-hidden className="text-xl text-pink-600 dark:text-purple-300">{collapsed ? "→" : "←"}</span>
-        </button>
+      <div className={`flex flex-col ${collapsed ? "px-2" : "px-4"} py-4 border-b border-white/20 dark:border-black/20`}> 
+        <div className="flex items-center justify-between">
+          <span className={`font-extrabold text-xl tracking-tight text-white drop-shadow-lg transition-all duration-200 ${collapsed ? "hidden" : "block"}`}>Hi Chloe!</span>
+          <button
+            aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+            onClick={() => setCollapsed((c) => !c)}
+            className="p-2 rounded-full bg-white/30 dark:bg-black/30 hover:bg-white/50 dark:hover:bg-black/50 focus:outline-none focus:ring-2 focus:ring-pink-400 dark:focus:ring-purple-400 transition-colors shadow"
+          >
+            <span aria-hidden className="text-xl text-pink-600 dark:text-purple-300">{collapsed ? "→" : "←"}</span>
+          </button>
+        </div>
+        {!collapsed && (
+          <div className="mt-2 text-lg font-semibold text-white/90 dark:text-white/80">
+            <div>{formatDate(currentTime)}</div>
+            <div className="text-xl font-bold">{currentTime.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", hour12: true })}</div>
+          </div>
+        )}
       </div>
       <ul className="flex-1 flex flex-col gap-1 mt-2 px-1">
         {NAV_ITEMS.map((item) => (
           <li key={item.href} className="">
             <Link
               href={item.href}
-              className={`flex items-center gap-3 px-3 py-2 rounded-xl transition-all whitespace-nowrap overflow-hidden text-ellipsis group font-semibold ${collapsed ? "text-xs px-2 justify-center" : "text-base"} hover:bg-white/30 hover:text-black dark:hover:bg-black/30 dark:hover:text-white focus:bg-white/40 focus:text-black dark:focus:bg-black/40 dark:focus:text-white outline-none`}
+              className={`flex items-center gap-3 px-3 py-3 rounded-xl transition-all whitespace-nowrap overflow-hidden text-ellipsis group font-bold ${collapsed ? "text-base px-2 justify-center" : "text-lg"} hover:bg-white/30 hover:text-black dark:hover:bg-black/30 dark:hover:text-white focus:bg-white/40 focus:text-black dark:focus:bg-black/40 dark:focus:text-white outline-none`}
               tabIndex={0}
             >
-              <span className={`inline-flex items-center justify-center text-lg transition-colors ${item.iconClass} group-hover:scale-110 group-focus:scale-110`} aria-hidden>{item.icon}</span>
+              <span className={`inline-flex items-center justify-center text-xl transition-colors ${item.iconClass} group-hover:scale-110 group-focus:scale-110`} aria-hidden>{item.icon}</span>
               {!collapsed && <span className="transition-all duration-200 drop-shadow-sm">{item.label}</span>}
               {collapsed && <span className="sr-only">{item.label}</span>}
             </Link>
           </li>
         ))}
       </ul>
-      <div className="p-4 text-xs text-center text-white/80 dark:text-white/40 border-t border-white/20 dark:border-black/20">
+      <div className="absolute bottom-0 left-0 w-full p-4 text-base font-semibold text-center text-white/80 dark:text-white/40 border-t border-white/20 dark:border-black/20 bg-transparent">
         {!collapsed ? "© 2025 Chloe Life Management" : "© 24"}
       </div>
       {/* Accent bar for extra color pop */}
